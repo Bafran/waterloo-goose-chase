@@ -46,9 +46,11 @@ goose = cl.Goose("imgs/goose.png", 0, 350) # create goose object
 draw_goose = pygame.sprite.Group() # create goose sprite group
 draw_goose.add(goose) # adding object to group
 
-player = cl.Player("engineer.png", 100, 350)
-draw_player = pygame.sprite.Group()
-draw_player.add(player)
+player = pc.Mario(100, 350)
+# draw_player = pygame.sprite.Group()
+# draw_player.add(player)
+player_velocity = 0
+is_jumping = False
 
 
 left = updatebg.Background("./imgs/backgrounds/Red.png", -799)
@@ -68,6 +70,9 @@ while not gb.DONE:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_UP]:
+        player.isJump = True
 
 
     # SCREEN BACKGROUND
@@ -77,7 +82,11 @@ while not gb.DONE:
     
     
     draw_goose.draw(screen) # draw the goose to the screen
-    draw_player.draw(screen)
+
+    # Player
+    player.draw(screen, "./engineer.png")
+    player.jump()
+    pygame.display.update()
 
     
     for i in range(len(test_list)):
