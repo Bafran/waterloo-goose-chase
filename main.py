@@ -1,11 +1,7 @@
-
 # LIBRARY IMPORTS
 import pygame
-
-
-# VARIABLES
-done = False
-
+import playercontroller as pc
+import globalvar as gb
 
 # COLOURS 
 BLACK = (0, 0, 0)
@@ -29,12 +25,9 @@ clock = pygame.time.Clock()
 
 
 # MAIN GAME LOOP
-while not done:
+while not gb.DONE:
     # --- Main event loop
-
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            done = True
+    pc.eventcheck()
 
     screen.fill(WHITE)
     
