@@ -46,7 +46,10 @@ goose = cl.Goose("imgs/goose.png", 0, 350) # create goose object
 draw_goose = pygame.sprite.Group() # create goose sprite group
 draw_goose.add(goose) # adding object to group
 
-player = pc.Mario(100, 350)
+player = pc.Mario("./engineer.png", 100, 350)
+draw_player = pygame.sprite.Group() # create goose sprite group
+draw_player.add(player) # adding object to group
+
 # draw_player = pygame.sprite.Group()
 # draw_player.add(player)
 player_velocity = 0
@@ -82,11 +85,13 @@ while not gb.DONE:
     
     
     draw_goose.draw(screen) # draw the goose to the screen
+    draw_player.draw(screen)
 
     # Player
-    player.draw(screen, "./engineer.png")
+    #player.draw(screen)
     player.jump()
-    pygame.display.update()
+    #pygame.display.update()
+
 
     
     for i in range(len(test_list)):
@@ -96,7 +101,9 @@ while not gb.DONE:
         draw_test.draw(screen)
         test_list[i][0] -= gb.SPEED 
 
-        if test_list[i][0] < -50: 
+        test_hit_list = pygame.sprite.spritecollide(player, draw_test, False)
+
+        if test_list[i][0] < -50 or test_hit_list: 
             y = random.randrange(350, 400) 
             test_list[i][1] = y 
             x = random.randrange(800, 1600) 
@@ -109,7 +116,9 @@ while not gb.DONE:
         draw_hammer.draw(screen)
         hammer_list[i][0] -= gb.SPEED 
 
-        if hammer_list[i][0] < -50: 
+        hammer_hit_list = pygame.sprite.spritecollide(player, draw_hammer, False)
+
+        if hammer_list[i][0] < -50 or hammer_hit_list: 
             y = random.randrange(350, 400)
             hammer_list[i][1] = y 
             x = random.randrange(800, 1600)
@@ -122,12 +131,16 @@ while not gb.DONE:
         draw_fail.draw(screen)
         fail_list[i][0] -= gb.SPEED 
 
-        if fail_list[i][0] < -50: 
+        fail_hit_list = pygame.sprite.spritecollide(player, draw_fail, False)
+
+        if fail_list[i][0] < -50 or fail_hit_list: 
             y = random.randrange(350, 400)
             fail_list[i][1] = y 
             x = random.randrange(800, 1600) 
             fail_list[i][0] = x
 
+
+    pygame.display.update()
 
     # UPDATING THE SCREEN
     pygame.display.flip()

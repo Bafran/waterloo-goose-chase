@@ -31,27 +31,42 @@ class Player (pygame.sprite.Sprite):
             velocity = 1
         return velocity
 
-class Mario():
+class Mario(pygame.sprite.Sprite):
 
-    def __init__(self, x, y):
+    def __init__(self, filename, x, y):
+
+        super().__init__()
         self.x = x
         self.y = y
+
+
+
         # isJump and jumpCount should be attributes of Mario.
         self.isJump = False
         self.jumpCount = 10
 
+        self.image = pygame.Surface([15, 15])
+        self.image = pygame.image.load(filename).convert()
+        self.image.set_colorkey(gb.BLACK)
+        self.rect = self.image.get_rect()
+
+        self.rect.x = x
+        self.rect.y = y
+
+    '''
     def draw(self, screen, image):
         screen.blit(pygame.image.load(image), (self.x, self.y))
+        '''
 
     def jump(self):
         # Check if mario is jumping and then execute the
         # jumping code.
         if self.isJump:
             if self.jumpCount >= -10:
-                neg = 3
+                neg = 5
                 if self.jumpCount < 0:
-                    neg = -3
-                self.y -= self.jumpCount**2 * 0.1 * neg
+                    neg = -5
+                self.rect.y -= self.jumpCount**2 * 0.1 * neg
                 self.jumpCount -= 0.5
             else:
                 self.isJump = False
