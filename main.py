@@ -50,7 +50,18 @@ class Goose(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
+# PLAYER CLASS
+class Player (pygame.sprite.Sprite):
 
+    def __init__(self, filename, x, y):
+        super().__init__()
+        self.image = pygame.Surface([15, 15])
+        self.image = pygame.image.load(filename).convert()
+        self.image.set_colorkey(BLACK)
+        self.rect = self.image.get_rect()
+
+        self.rect.x=x
+        self.rect.y=y
 
 # OBJECTS 
 
@@ -58,8 +69,9 @@ goose = Goose("imgs/goose.png", 0, 600) # create goose object
 draw_goose = pygame.sprite.Group() # create goose sprite group
 draw_goose.add(goose) # adding object to group
 
-
-
+player = Player("engineer.png", 450, 575)
+draw_player = pygame.sprite.Group()
+draw_player.add(player)
 
 
 # MAIN GAME LOOP
@@ -72,15 +84,11 @@ while not gb.DONE:
         if event.type == pygame.QUIT:
             done = True
 
-
-
     # SCREEN BACKGROUND
     screen.fill(BLUE)
     
-    
     draw_goose.draw(screen) # draw the goose to the screen
-
-
+    draw_player.draw(screen)
 
     # UPDATING THE SCREEN
     pygame.display.flip()
