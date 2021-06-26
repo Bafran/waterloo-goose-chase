@@ -1,1 +1,4 @@
 DONE = False
+HEIGHT = 450
+WIDTH = 800
+SPEED = 5
