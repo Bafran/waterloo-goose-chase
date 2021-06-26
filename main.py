@@ -3,16 +3,7 @@
 import pygame
 import playercontroller as pc
 import globalvar as gb
-
-
-# VARIABLES
-done = False
-
-
-# COLOURS 
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-BLUE = (157, 210, 235)
+import classes as cl
 
 
 # PYGAME SET UP
@@ -20,7 +11,7 @@ BLUE = (157, 210, 235)
 pygame.init()
 
 # Set the width and height of the screen [width, height]
-size = (1000, 700)
+size = (gb.WIDTH, gb.HEIGHT)
 screen = pygame.display.set_mode(size)
 
 pygame.display.set_caption("Waterloo Goose Chase")
@@ -28,27 +19,6 @@ pygame.display.set_caption("Waterloo Goose Chase")
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
 
-
-
-# CLASSES
-
-# GOOSE CLASS
-class Goose(pygame.sprite.Sprite):
-
-    def __init__(self, filename, x, y):
-        
-        super().__init__()
-        
-        self.image = pygame.Surface([15, 15])
-
-        self.image = pygame.image.load(filename).convert()
-
-        self.image.set_colorkey(BLACK) 
-
-        self.rect = self.image.get_rect()
-
-        self.rect.x = x
-        self.rect.y = y
 
 # PLAYER CLASS
 class Player (pygame.sprite.Sprite):
@@ -63,15 +33,29 @@ class Player (pygame.sprite.Sprite):
         self.rect.x=x
         self.rect.y=y
 
-# OBJECTS 
 
-goose = Goose("imgs/goose.png", 0, 600) # create goose object
+# OBJECTS 
+goose = cl.Goose("imgs/goose.png", 0, 300) # create goose object
 draw_goose = pygame.sprite.Group() # create goose sprite group
 draw_goose.add(goose) # adding object to group
+
 
 player = Player("engineer.png", 450, 575)
 draw_player = pygame.sprite.Group()
 draw_player.add(player)
+
+hammer = cl.Hammer("imgs/hammer.png", 100, 100) # create hammer object
+draw_hammer = pygame.sprite.Group() # create hammer sprite group
+draw_hammer.add(hammer) # adding object to group
+
+fail = cl.Fail("imgs/fail.png", 200, 100) # create fail object
+draw_fail = pygame.sprite.Group() # create fail sprite group
+draw_fail.add(fail) # adding object to group
+
+test = cl.Test("imgs/test.png", 300, 100) # create test object
+draw_test = pygame.sprite.Group() # create test sprite group
+draw_test.add(test) # adding object to group
+
 
 
 # MAIN GAME LOOP
@@ -85,10 +69,14 @@ while not gb.DONE:
             done = True
 
     # SCREEN BACKGROUND
-    screen.fill(BLUE)
+    screen.fill(gb.BLUE)
     
     draw_goose.draw(screen) # draw the goose to the screen
     draw_player.draw(screen)
+    draw_hammer.draw(screen) # draw the hammer to the screen
+    draw_fail.draw(screen) # draw the fail to the screen
+    draw_test.draw(screen) # draw the test to the screen
+
 
     # UPDATING THE SCREEN
     pygame.display.flip()
