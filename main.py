@@ -51,9 +51,9 @@ draw_player = pygame.sprite.Group()
 draw_player.add(player)
 
 
-left = updatebg.Background("./imgs/backgrounds/Red.png", -799)
-middle = updatebg.Background("./imgs/backgrounds/Blue.png", 0)
-right = updatebg.Background("./imgs/backgrounds/Green.png")
+left = updatebg.Background("./imgs/backgrounds/background-1.jpeg", -799)
+middle = updatebg.Background("./imgs/backgrounds/background-2.jpeg", 0)
+right = updatebg.Background("./imgs/backgrounds/background-3.jpeg")
 
 left.printimage(screen)
 middle.printimage(screen)
