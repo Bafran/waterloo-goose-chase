@@ -4,6 +4,7 @@ import pygame
 import playercontroller as pc
 import globalvar as gb
 import classes as cl
+import updatebackground as updatebg
 
 
 # PYGAME SET UP
@@ -41,7 +42,15 @@ test = cl.Test("imgs/test.png", 300, 100) # create test object
 draw_test = pygame.sprite.Group() # create test sprite group
 draw_test.add(test) # adding object to group
 
+# Background
 
+left = updatebg.Background("./imgs/backgrounds/Red.png", -799)
+middle = updatebg.Background("./imgs/backgrounds/Blue.png", 0)
+right = updatebg.Background("./imgs/backgrounds/Green.png")
+
+left.printimage(screen)
+middle.printimage(screen)
+right.printimage(screen)
 
 # MAIN GAME LOOP
 while not gb.DONE:
@@ -54,7 +63,9 @@ while not gb.DONE:
             done = True
 
     # SCREEN BACKGROUND
-    screen.fill(gb.BLUE)
+    left = left.scroll(screen)
+    middle = middle.scroll(screen)
+    right = right.scroll(screen)
     
     draw_goose.draw(screen) # draw the goose to the screen
     draw_player.draw(screen)
