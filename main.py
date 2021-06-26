@@ -54,7 +54,7 @@ class Goose(pygame.sprite.Sprite):
 
 # OBJECTS 
 
-goose = Goose("goose.png", 0, 600) # create goose object
+goose = Goose("imgs/goose.png", 0, 600) # create goose object
 draw_goose = pygame.sprite.Group() # create goose sprite group
 draw_goose.add(goose) # adding object to group
 
