@@ -52,7 +52,7 @@ class Mario():
                 if self.jumpCount < 0:
                     neg = -3
                 self.y -= self.jumpCount**2 * 0.1 * neg
-                self.jumpCount -= 0.3
+                self.jumpCount -= 0.5
             else:
                 self.isJump = False
                 self.jumpCount = 10
