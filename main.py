@@ -79,8 +79,11 @@ left.printimage(screen)
 middle.printimage(screen)
 right.printimage(screen)
 
+global gamended
+gamended = False
+
 # MAIN GAME LOOP
-while not gb.DONE:
+while not gamended and not gb.DONE:
     # --- Main event loop
     pc.eventcheck()
 
@@ -105,11 +108,6 @@ while not gb.DONE:
     # Player
     #player.draw(screen)
     player.jump()
-<<<<<<< HEAD
-    #pygame.display.update()
-
-=======
->>>>>>> 4cbaaf1071bd3657e8af9427440df5f7dbba7905
 
     
     for i in range(len(test_list)):
@@ -121,11 +119,14 @@ while not gb.DONE:
 
         test_hit_list = pygame.sprite.spritecollide(player, draw_test, False)
 
-        if test_list[i][0] < -50 or test_hit_list: 
+        if test_list[i][0] < -50:
             y = random.randrange(350, 400) 
             test_list[i][1] = y 
             x = random.randrange(800, 1600) 
             test_list[i][0] = x
+        if test_hit_list:
+            updatebg.endgame(screen)
+            gamended = True
 
     for i in range(len(hammer_list)):
         hammer = cl.Hammer("imgs/hammer.png", hammer_list[i][0], hammer_list[i][1])
@@ -136,11 +137,14 @@ while not gb.DONE:
 
         hammer_hit_list = pygame.sprite.spritecollide(player, draw_hammer, False)
 
-        if hammer_list[i][0] < -50 or hammer_hit_list: 
+        if hammer_list[i][0] < -50:
             y = random.randrange(350, 400)
             hammer_list[i][1] = y 
             x = random.randrange(800, 1600)
             hammer_list[i][0] = x
+        if hammer_hit_list:
+            updatebg.endgame(screen)
+            gamended = True
 
     for i in range(len(fail_list)):
         fail = cl.Fail("imgs/fail.png", fail_list[i][0], fail_list[i][1])
@@ -151,11 +155,14 @@ while not gb.DONE:
 
         fail_hit_list = pygame.sprite.spritecollide(player, draw_fail, False)
 
-        if fail_list[i][0] < -50 or fail_hit_list: 
+        if fail_list[i][0] < -50: 
             y = random.randrange(350, 400)
             fail_list[i][1] = y 
             x = random.randrange(800, 1600) 
             fail_list[i][0] = x
+        if fail_hit_list:
+            updatebg.endgame(screen)
+            gamended = True
 
 
     pygame.display.update()
@@ -165,6 +172,11 @@ while not gb.DONE:
 
     # LIMIT TO 60 FRAMES/ SEC
     clock.tick(60)
+
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
 
 # CLOSE WINDOW & QUIT
 pygame.quit()

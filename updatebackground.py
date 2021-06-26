@@ -20,3 +20,7 @@ class Background:
         self.x -= gb.SPEED
         screen.blit(self.image, (self.x, self.y))
         return self
+
+
+def endgame(screen):
+    screen.blit(pygame.image.load("./imgs/endscreen.png"), (0, 0))
