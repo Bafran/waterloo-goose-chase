@@ -57,6 +57,21 @@ left = updatebg.Background("./imgs/backgrounds/background-1.jpeg", -799)
 middle = updatebg.Background("./imgs/backgrounds/background-2.jpeg", 0)
 right = updatebg.Background("./imgs/backgrounds/background-3.jpeg")
 
+
+
+started = False
+screen.blit(pygame.image.load("./imgs/titlescreen.png"), (0, 0))
+pygame.display.update()
+
+while not started:
+    ev = pygame.event.get()
+    for event in ev:
+        if event.type == pygame.MOUSEBUTTONUP:
+            started = True
+        if event.type == pygame.QUIT:
+            started = True
+            gb.DONE = True
+
 left.printimage(screen)
 middle.printimage(screen)
 right.printimage(screen)
@@ -86,7 +101,6 @@ while not gb.DONE:
     # Player
     player.draw(screen, "./engineer.png")
     player.jump()
-    pygame.display.update()
 
     
     for i in range(len(test_list)):
