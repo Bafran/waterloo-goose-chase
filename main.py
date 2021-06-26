@@ -19,28 +19,13 @@ pygame.display.set_caption("Waterloo Goose Chase")
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
 
-
-# PLAYER CLASS
-class Player (pygame.sprite.Sprite):
-
-    def __init__(self, filename, x, y):
-        super().__init__()
-        self.image = pygame.Surface([15, 15])
-        self.image = pygame.image.load(filename).convert()
-        self.image.set_colorkey(BLACK)
-        self.rect = self.image.get_rect()
-
-        self.rect.x=x
-        self.rect.y=y
-
-
 # OBJECTS 
 goose = cl.Goose("imgs/goose.png", 0, 300) # create goose object
 draw_goose = pygame.sprite.Group() # create goose sprite group
 draw_goose.add(goose) # adding object to group
 
 
-player = Player("engineer.png", 450, 575)
+player = cl.Player("engineer.png", 450, 200)
 draw_player = pygame.sprite.Group()
 draw_player.add(player)
 
