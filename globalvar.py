@@ -2,3 +2,7 @@ DONE = False
 HEIGHT = 450
 WIDTH = 800
 SPEED = 5
+
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+BLUE = (157, 210, 235)
